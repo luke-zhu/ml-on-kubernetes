@@ -13,7 +13,7 @@ postgresql:
   global:
     imageRegistry: docker.m.daocloud.io
     security:
-      allowInsecureImages: false
+      allowInsecureImages: true
 
 service:
   type: NodePort
