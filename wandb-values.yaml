@@ -1,11 +1,9 @@
 image:
-  repository: 10.0.0.50:32020/wandb/local
-
-license: 
+  repository: docker.m.daocloud.io/wandb/local
 
 service:
   type: NodePort
 
 mysql:
   image:
-    repository: 10.0.0.50:32020/mysql/mysql-server
+    repository: docker.m.daocloud.io/mysql/mysql-server
