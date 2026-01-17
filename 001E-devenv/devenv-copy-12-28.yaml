@@ -1,0 +1,73 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: dev
+spec:
+  type: NodePort
+  selector:
+    app: dev
+  ports:
+  - name: ssh
+    port: 22
+    nodePort: 30018
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: dev
+spec:
+  serviceName: dev
+  replicas: 1 # There should only be one, since the pod attaches to a single read-write once PVC.
+  selector:
+    matchLabels:
+      app: dev
+  template:
+    metadata:
+      labels:
+        app: dev
+    spec:
+      runtimeClassName: nvidia
+      containers:
+        - name: dev
+          image: localhost:32021/devenv:latest
+          imagePullPolicy: Always
+          resources:
+            requests:
+              cpu: "0"
+              memory: 0Gi
+            limits:
+              memory: 8Gi
+              cpu: "2"
+          volumeMounts:
+            - mountPath: /home/dev/
+              name: home
+            - mountPath: /home/dev/.kube/config
+              name: kube-config
+              subPath: config
+            - mountPath: /etc/shuzijihechuli/dev/
+              name: dev-secrets
+              readOnly: true
+            - name: docker-socket
+              mountPath: /var/run/docker.sock
+      volumes:
+        - name: kube-config
+          configMap:
+            name: kube-config
+            defaultMode: 0644
+        - name: dev-secrets
+          secret:
+            secretName: dev
+        - name: docker-socket
+          hostPath:
+            path: /var/run/docker.sock
+            type: Socket
+  volumeClaimTemplates:
+    - metadata:
+        name: home
+      spec:
+        resources:
+          requests:
+            storage: "20Gi"
+        volumeMode: Filesystem
+        accessModes:
+          - ReadWriteOnce

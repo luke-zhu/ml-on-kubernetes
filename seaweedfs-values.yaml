@@ -1,0 +1,6 @@
+global:
+  registry: 10.0.0.50:32020
+
+filer:
+  s3:
+    enabled: true

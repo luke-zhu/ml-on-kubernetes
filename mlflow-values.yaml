@@ -1,0 +1,19 @@
+image:
+  repository: docker.m.daocloud.io/burakince/mlflow
+initImages:
+  dbchecker:
+    repository:  docker.m.daocloud.io/library/busybox
+  mlflowDbMigration:
+    repository:  docker.m.daocloud.io/burakince/mlflow
+  iniFileInitializer:
+    repository:  docker.m.daocloud.io/library/busybox
+
+postgresql:
+  enabled: true
+  global:
+    imageRegistry: docker.m.daocloud.io
+    security:
+      allowInsecureImages: false
+
+service:
+  type: NodePort

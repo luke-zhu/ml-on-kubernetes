@@ -1,0 +1,11 @@
+apiVersion: v2
+appVersion: 0.60.0
+description: A Helm chart for deploying W&B to Kubernetes
+icon: https://wandb.ai/logo.svg
+maintainers:
+- email: support@wandb.com
+  name: wandb
+  url: https://wandb.com
+name: wandb
+type: application
+version: 0.3.9

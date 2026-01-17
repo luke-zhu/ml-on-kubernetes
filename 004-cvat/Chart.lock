@@ -1,0 +1,15 @@
+dependencies:
+- name: postgresql
+  repository: https://charts.bitnami.com/bitnami
+  version: 12.1.15
+- name: clickhouse
+  repository: https://charts.bitnami.com/bitnami
+  version: 4.1.16
+- name: traefik
+  repository: https://helm.traefik.io/traefik
+  version: 37.3.0
+- name: redis
+  repository: https://charts.bitnami.com/bitnami
+  version: 19.6.4
+digest: sha256:f0fe74b44d7336577dfe90dfcaf5909fa388541faf454fe97c224743e7064fdc
+generated: "2025-12-29T05:34:45.366381595Z"

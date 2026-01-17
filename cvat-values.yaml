@@ -1,0 +1,19 @@
+cvat:
+  backend:
+    image: 10.0.0.50:32020/cvat/server
+    defaultStorage:
+      storageClassName: nfs
+  frontend:
+    image: 10.0.0.50:32020/cvat/ui
+    service:
+      type: NodePort
+      ports:
+      - port: 8000
+        targetPort: 8000
+        protocol: TCP
+        name: http
+        nodePort: 30016
+  opa:
+    image: 10.0.0.50:32020/openpolicyagent/opa
+  kvrocks:
+    image: 10.0.0.50:32020/apache/kvrocks
